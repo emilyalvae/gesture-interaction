@@ -1,23 +1,43 @@
-import mediapipe as mp
+import cv2
 
 
 class Renderer:
 
-    def __init__(self):
+    CONNECTIONS = [
+        (0,1),(1,2),(2,3),(3,4),
+        (0,5),(5,6),(6,7),(7,8),
+        (5,9),(9,10),(10,11),(11,12),
+        (9,13),(13,14),(14,15),(15,16),
+        (13,17),(17,18),(18,19),(19,20),
+        (0,17)
+    ]
 
-        self.mp_hands = mp.solutions.hands
-        self.mp_drawing = mp.solutions.drawing_utils
+    def draw_hands(self, frame, hands):
 
-    def draw_hands(self, frame, results):
+        h, w = frame.shape[:2]
 
-        if results.multi_hand_landmarks:
+        for hand in hands:
 
-            for hand_landmarks in results.multi_hand_landmarks:
+            # Dibujar puntos
+            for landmark in hand.landmarks:
 
-                self.mp_drawing.draw_landmarks(
-                    frame,
-                    hand_landmarks,
-                    self.mp_hands.HAND_CONNECTIONS,
-                )
+                x = int(landmark.x * w)
+                y = int(landmark.y * h)
+
+                cv2.circle(frame, (x, y), 5, (0,255,0), -1)
+
+            # Dibujar conexiones
+            for start, end in self.CONNECTIONS:
+
+                p1 = hand.landmarks[start]
+                p2 = hand.landmarks[end]
+
+                x1 = int(p1.x * w)
+                y1 = int(p1.y * h)
+
+                x2 = int(p2.x * w)
+                y2 = int(p2.y * h)
+
+                cv2.line(frame, (x1,y1), (x2,y2), (255,0,0), 2)
 
         return frame

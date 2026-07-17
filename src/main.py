@@ -4,6 +4,7 @@ from vision.camera import Camera
 from vision.hand_tracker import HandTracker
 from vision.renderer import Renderer
 
+
 def main():
 
     camera = Camera()
@@ -20,19 +21,19 @@ def main():
 
             if frame is None:
                 break
-           
+
             # Efecto espejo
             frame = cv2.flip(frame, 1)
-           
-            # Detectar manos
-            results = tracker.process(frame)
 
-            # Dibujar landmarks
-            frame = renderer.draw_hands(frame, results)
-            
+            # Detectar manos
+            hands = tracker.process(frame)
+
+            # Dibujar manos
+            renderer.draw_hands(frame, hands)
+
             cv2.imshow("Gesture3D", frame)
 
-            if cv2.waitKey(1) == 27:
+            if cv2.waitKey(1) == 27:  # ESC
                 break
 
     finally:
