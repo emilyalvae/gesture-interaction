@@ -1,8 +1,8 @@
 import cv2
 
-from vision.camera import Camera
-from vision.hand_tracker import HandTracker
-from vision.renderer import Renderer
+from src.vision.camera import Camera
+from src.vision.hand_tracker import HandTracker
+from src.vision.renderer import Renderer
 
 
 def main():

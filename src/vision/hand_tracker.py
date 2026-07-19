@@ -1,8 +1,8 @@
 import cv2
 import mediapipe as mp
 
-from vision.hand import Hand
-from vision.landmark import Landmark
+from src.vision.hand import Hand
+from src.vision.landmark import Landmark
 
 
 class HandTracker:

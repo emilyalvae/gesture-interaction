@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List
 
-from vision.landmark import Landmark
+from src.vision.landmark import Landmark
 
 
 @dataclass
