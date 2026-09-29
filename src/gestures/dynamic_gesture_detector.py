@@ -23,27 +23,11 @@ class DynamicGestureDetector:
         direction: Direction,
     ) -> DynamicGesture:
 
-        print(
-            f"Gesture={gesture}, "
-            f"Movement={movement}, "
-            f"Direction={direction}"
-        )
-
-        if gesture == Gesture.PINCH:
-            print("PINCH OK")
-
-        if movement == Movement.FAST:
-            print("FAST OK")
-
-        if direction != Direction.NONE:
-            print("DIRECTION OK")
-
         if (
             gesture == Gesture.PINCH
             and movement == Movement.FAST
             and direction != Direction.NONE
         ):
-            print(">>> THROW DETECTED <<<")
             return DynamicGesture.THROW
 
         return DynamicGesture.NONE
